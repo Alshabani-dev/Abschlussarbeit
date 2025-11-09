@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎵 WAV Stream</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <main class="player-shell">
+      <header>
+        <p class="eyebrow">localhost:8080</p>
+        <h1>🎵 WAV Stream</h1>
+        <p class="subtitle">Custom audio streaming demo with modern UI flair</p>
+      </header>
+
+      <section class="track-info">
+        <span class="icon">🎼</span>
+        <div>
+          <p class="label">Now streaming</p>
+          <span class="track-name">track.wav</span>
+        </div>
+      </section>
+
+      <section class="player-card">
+        <audio id="player" src="/audio" preload="metadata"></audio>
+
+        <div class="time-row">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+
+        <input
+          type="range"
+          id="progressBar"
+          min="0"
+          max="100"
+          value="0"
+          step="0.1"
+        />
+
+        <div class="controls">
+          <button id="play">▶ Play</button>
+          <button id="pause">⏸ Pause</button>
+          <button id="stop">⏹ Stop</button>
+        </div>
+
+        <p id="status" class="status-pill status-idle">Ready to play</p>
+      </section>
+    </main>
+
+    <div class="floating-blobs">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
