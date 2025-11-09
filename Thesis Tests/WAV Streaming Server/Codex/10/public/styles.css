@@ -1,0 +1,173 @@
+:root {
+  color-scheme: dark;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --pink: #ff71ce;
+  --purple: #b967ff;
+  --blue: #01cdfe;
+  --green: #05ffa1;
+  --orange: #ffb347;
+  --red: #ff5c5c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top, rgba(1, 205, 254, 0.35), transparent 40%),
+    radial-gradient(circle at bottom, rgba(185, 103, 255, 0.35), transparent 45%),
+    linear-gradient(135deg, #050505 0%, #12121a 100%);
+  color: #f5f5f5;
+}
+
+.player-shell {
+  width: min(420px, 100%);
+  text-align: center;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+}
+
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #b8c0d4;
+  letter-spacing: 0.02em;
+}
+
+.track-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1rem;
+}
+
+.track-name {
+  font-weight: 600;
+}
+
+.player-card {
+  padding: 1.75rem;
+  border-radius: 1.5rem;
+  background: rgba(15, 15, 25, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
+}
+
+#progressBar {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+#progressBar::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 12px rgba(1, 205, 254, 0.8);
+  cursor: pointer;
+  border: none;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+button {
+  flex: 1;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #090909;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#play {
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  box-shadow: 0 12px 25px rgba(5, 255, 161, 0.35);
+}
+
+#pause {
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  box-shadow: 0 12px 25px rgba(255, 179, 71, 0.35);
+}
+
+#stop {
+  background: linear-gradient(135deg, var(--red), var(--pink));
+  box-shadow: 0 12px 25px rgba(255, 92, 92, 0.35);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.status {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.status.playing {
+  color: var(--green);
+}
+
+.status.paused {
+  color: var(--orange);
+}
+
+.status.stopped {
+  color: var(--red);
+}
+
+.status.ready {
+  color: var(--blue);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

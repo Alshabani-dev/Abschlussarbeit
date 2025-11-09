@@ -1,0 +1,1 @@
+/nix/store/zd2viirgdm4ffgipgpslmysmlzs6fscb-gcc-wrapper-12.3.0/bin/g++  -Wall -Wextra -Wpedantic CMakeFiles/wavserver.dir/src/main.cpp.o CMakeFiles/wavserver.dir/src/Server.cpp.o -o wavserver 

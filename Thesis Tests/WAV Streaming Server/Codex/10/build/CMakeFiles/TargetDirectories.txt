@@ -1,0 +1,3 @@
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/WAV Streaming Server/Codex/10/build/CMakeFiles/wavserver.dir
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/WAV Streaming Server/Codex/10/build/CMakeFiles/edit_cache.dir
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/WAV Streaming Server/Codex/10/build/CMakeFiles/rebuild_cache.dir
