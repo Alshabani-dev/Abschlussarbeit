@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎵 WAV Stream</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="background-pattern"></div>
+    <main class="player-shell">
+      <header>
+        <p class="eyebrow">Localhost · Port 8080</p>
+        <h1>🎵 WAV Stream</h1>
+        <p class="subtitle">Custom socket server with glassy controls and real-time feedback.</p>
+      </header>
+
+      <section class="track-info">
+        <div class="icon" aria-hidden="true">🎼</div>
+        <div>
+          <p class="label">Now streaming</p>
+          <span class="track-name">track.wav</span>
+        </div>
+      </section>
+
+      <section class="player-card">
+        <audio id="player" src="/audio" preload="metadata" hidden></audio>
+
+        <div class="time-row">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+
+        <div class="slider-wrap">
+          <input type="range" id="progressBar" min="0" max="100" value="0" step="0.1" />
+          <div class="wave-decoration" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="play" class="primary">▶ Play</button>
+          <button id="pause">⏸ Pause</button>
+          <button id="stop" class="danger">⏹ Stop</button>
+        </div>
+
+        <p id="status" class="status stopped">Ready to play</p>
+      </section>
+    </main>
+
+    <footer class="footer-note">
+      Built with sockets · Binary-safe streaming · 60 FPS updates
+    </footer>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
