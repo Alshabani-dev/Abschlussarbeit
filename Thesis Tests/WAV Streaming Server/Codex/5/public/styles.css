@@ -1,0 +1,217 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #03071e, #370617, #6d23b6, #f72585);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.25);
+  --text-primary: #f8f9fa;
+  --text-muted: rgba(248, 249, 250, 0.72);
+  --accent: #ffd60a;
+  --accent-strong: #ff7b00;
+  --success: #00c46a;
+  --warning: #ffba08;
+  --danger: #f94144;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text-primary);
+  background-image: var(--bg-gradient);
+  background-size: 300% 300%;
+  animation: drift 16s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+@keyframes drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.app-shell {
+  width: min(540px, 100%);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.subtitle {
+  margin: 0.4rem 0 0;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.player-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 1.5rem;
+}
+
+.track-info .icon {
+  font-size: 2rem;
+}
+
+.track-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.track-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+#progressBar {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+#progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid #121420;
+  box-shadow: 0 0 12px rgba(255, 214, 10, 0.6);
+}
+
+#progressBar::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid #121420;
+  box-shadow: 0 0 12px rgba(255, 214, 10, 0.6);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.controls button {
+  flex: 1;
+  border: none;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #121420;
+  background: var(--accent);
+  transition: transform 0.15s ease, filter 0.15s ease;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.controls button:active {
+  transform: translateY(1px);
+}
+
+#pause {
+  background: var(--accent-strong);
+}
+
+#stop {
+  background: var(--danger);
+  color: #fff;
+}
+
+.status {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.status.ready {
+  color: var(--text-muted);
+}
+
+.status.playing {
+  color: var(--success);
+}
+
+.status.paused {
+  color: var(--warning);
+}
+
+.status.stopped {
+  color: var(--danger);
+}
+
+@media (max-width: 540px) {
+  body {
+    padding: 1.25rem;
+  }
+
+  .player-card {
+    padding: 1.5rem;
+  }
+
+  .progress {
+    grid-template-columns: 48px 1fr 48px;
+  }
+}
