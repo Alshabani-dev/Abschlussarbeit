@@ -1,0 +1,258 @@
+:root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+    --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --backdrop-filter: blur(10px);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --track-info-bg: linear-gradient(90deg, #fde68a 0%, #f59e0b 100%);
+    --progress-bg: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    --thumb-bg: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --status-playing: #d1fae5;
+    --status-paused: #fef3c7;
+    --status-stopped: #fee2e2;
+    --border-playing: #10b981;
+    --border-paused: #f59e0b;
+    --border-stopped: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0.5px, transparent 1px),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0.5px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0.5px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    animation: dots 15s linear infinite;
+}
+
+@keyframes dots {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-10px, -10px); }
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card-bg);
+    backdrop-filter: var(--backdrop-filter);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.track-info {
+    background: var(--track-info-bg);
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.track-info .icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.track-name {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.player-wrapper {
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    margin-bottom: 10px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--thumb-bg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--progress-bg);
+    border-radius: 4px;
+    height: 8px;
+}
+
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.status {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.status.playing {
+    background-color: var(--status-playing);
+    border: 1px solid var(--border-playing);
+    color: var(--border-playing);
+}
+
+.status.paused {
+    background-color: var(--status-paused);
+    border: 1px solid var(--border-paused);
+    color: var(--border-paused);
+}
+
+.status.stopped {
+    background-color: var(--status-stopped);
+    border: 1px solid var(--border-stopped);
+    color: var(--border-stopped);
+}
+
+.wave-animation {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,60 C300,120 600,0 900,60 C1050,90 1200,60 1200,60 L1200,120 L0,120 Z" fill="%238b5cf6" opacity="0.3"/><path d="M0,90 C300,150 600,30 900,90 C1050,120 1200,90 1200,90 L1200,120 L0,120 Z" fill="%236366f1" opacity="0.3"/><path d="M0,30 C300,90 600,-30 900,30 C1050,60 1200,30 1200,30 L1200,120 L0,120 Z" fill="%233730a3" opacity="0.2"/></svg>') no-repeat center bottom;
+    background-size: 100% 100px;
+    animation: wave 8s linear infinite;
+}
+
+@keyframes wave {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .control-btn {
+        width: 100%;
+    }
+}
