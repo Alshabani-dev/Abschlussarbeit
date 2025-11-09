@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAV Stream</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 WAV Stream</h1>
+        <p class="subtitle">Modern audio streaming with C++</p>
+
+        <div class="track-info">
+            <div class="icon">🎼</div>
+            <span class="track-name">track.wav</span>
+        </div>
+
+        <div class="player-wrapper">
+            <audio id="player" src="/audio" preload="metadata"></audio>
+
+            <div class="progress-container">
+                <input type="range" id="progressBar" min="0" max="100" value="0" step="0.1">
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span>/</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="play" class="control-btn">▶ Play</button>
+                <button id="pause" class="control-btn">⏸ Pause</button>
+                <button id="stop" class="control-btn">⏹ Stop</button>
+            </div>
+
+            <p id="status" class="status">Ready to play</p>
+        </div>
+
+        <div class="wave-animation"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
