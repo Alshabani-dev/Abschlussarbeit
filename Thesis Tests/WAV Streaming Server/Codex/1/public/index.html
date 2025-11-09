@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 WAV Stream</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="player-shell">
+        <header>
+            <p class="eyebrow">localhost:8080</p>
+            <h1>🎵 WAV Stream</h1>
+            <p class="subtitle">Custom audio player with real-time updates & WAV streaming.</p>
+        </header>
+
+        <section class="track-info">
+            <span class="icon">🎼</span>
+            <div>
+                <p class="label">Now Playing</p>
+                <span class="track-name">track.wav</span>
+            </div>
+        </section>
+
+        <div class="player-wrapper">
+            <audio id="player" src="/audio" preload="metadata"></audio>
+
+            <div class="timeline">
+                <input type="range" id="progressBar" min="0" max="100" value="0" step="0.1">
+            </div>
+
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+
+            <div class="controls">
+                <button id="play" class="primary">
+                    <span>▶</span>
+                    Play
+                </button>
+                <button id="pause">
+                    <span>⏸</span>
+                    Pause
+                </button>
+                <button id="stop">
+                    <span>⏹</span>
+                    Stop
+                </button>
+            </div>
+
+            <p id="status" class="status ready">Ready to play</p>
+        </div>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>
