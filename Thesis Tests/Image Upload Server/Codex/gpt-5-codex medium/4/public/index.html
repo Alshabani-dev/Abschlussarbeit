@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>Simple C++ Web Server</h1>
+            <p>Use the form below to upload an image. Supported formats: JPG, JPEG, PNG, GIF, BMP.</p>
+            <form id="uploadForm" enctype="multipart/form-data" method="post">
+                <label class="file-input">
+                    <span>Select image…</span>
+                    <input type="file" name="file" id="fileInput" accept="image/*" required>
+                </label>
+                <button type="submit">Upload</button>
+            </form>
+            <div id="message" role="status"></div>
+        </section>
+        <section class="card">
+            <h2>Test Routes</h2>
+            <p>Use <code>curl</code> from the terminal to verify behaviour:</p>
+            <pre><code>curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/
+curl -s -o /dev/null -w "%{http_code}\n" -F "file=@test.jpg" http://localhost:8080/
+curl -s -o /dev/null -w "%{http_code}\n" -F "wrong=@test.jpg" http://localhost:8080/</code></pre>
+        </section>
+    </main>
+    <script src="/scripts.js"></script>
+</body>
+</html>

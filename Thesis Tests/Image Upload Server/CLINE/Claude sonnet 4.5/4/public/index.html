@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Web Server - Image Upload</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>C++ Web Server</h1>
+            <p class="subtitle">Simple Image Upload Service</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <h2>Upload Image</h2>
+                <p class="info">Supported formats: JPG, JPEG, PNG, GIF, BMP</p>
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fileInput" name="file" accept="image/*" required>
+                        <label for="fileInput" class="file-label">
+                            <span id="fileName">Choose an image file</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="upload-btn">Upload Image</button>
+                </form>
+                
+                <div id="preview" class="preview-section" style="display: none;">
+                    <h3>Preview:</h3>
+                    <img id="previewImage" src="" alt="Preview">
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>Server Information</h2>
+                <ul>
+                    <li><strong>Technology:</strong> C++ Socket Programming</li>
+                    <li><strong>HTTP Methods:</strong> GET, POST</li>
+                    <li><strong>Features:</strong> Static file serving, Image upload with validation</li>
+                    <li><strong>Upload Directory:</strong> Data/</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 C++ Web Server Project</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>

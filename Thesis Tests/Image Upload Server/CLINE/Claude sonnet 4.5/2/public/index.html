@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Web Server - Image Upload</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Image Upload Server</h1>
+            <p>Upload your images (JPG, PNG, GIF, BMP)</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <label for="fileInput" class="file-label">
+                            <span class="file-icon">📁</span>
+                            <span class="file-text">Choose an image file</span>
+                        </label>
+                        <input type="file" id="fileInput" name="file" accept="image/*" required>
+                    </div>
+                    
+                    <div id="fileInfo" class="file-info hidden">
+                        <span id="fileName"></span>
+                        <span id="fileSize"></span>
+                    </div>
+                    
+                    <button type="submit" class="upload-btn">
+                        <span class="btn-icon">⬆️</span>
+                        Upload Image
+                    </button>
+                </form>
+            </div>
+            
+            <div class="info-section">
+                <h2>Supported Formats</h2>
+                <ul class="format-list">
+                    <li>✅ JPEG / JPG</li>
+                    <li>✅ PNG</li>
+                    <li>✅ GIF</li>
+                    <li>✅ BMP</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Built with C++ Socket Programming</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>

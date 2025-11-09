@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Upload Server</h1>
+            <p>Upload your images (JPG, PNG, GIF, BMP)</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fileInput" name="file" accept="image/*" required>
+                        <label for="fileInput" class="file-label">
+                            <span id="fileName">Choose an image file...</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="upload-btn">Upload Image</button>
+                </form>
+                
+                <div id="preview-container" class="preview-container hidden">
+                    <h3>Preview:</h3>
+                    <img id="imagePreview" src="" alt="Image preview">
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>Supported Formats</h2>
+                <ul>
+                    <li>JPEG / JPG</li>
+                    <li>PNG</li>
+                    <li>GIF</li>
+                    <li>BMP</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>C++ Web Server with Socket Programming</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Simple C++ Web Server</h1>
+        <section>
+            <p>This server serves static files and accepts image uploads (JPG, PNG, GIF, BMP).</p>
+        </section>
+        <section class="upload-section">
+            <form id="upload-form" enctype="multipart/form-data" method="post">
+                <label for="file-input">Select an image to upload:</label>
+                <input type="file" id="file-input" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp" required>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+    </main>
+    <script src="/scripts.js"></script>
+</body>
+</html>

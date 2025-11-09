@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Upload Server</h1>
+        <p class="subtitle">Upload your images (JPG, PNG, GIF, BMP)</p>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="upload-area">
+                <input type="file" id="fileInput" name="file" accept="image/*" required>
+                <label for="fileInput" class="upload-label">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span class="upload-text">Choose an image to upload</span>
+                    <span class="file-name" id="fileName"></span>
+                </label>
+            </div>
+            
+            <button type="submit" class="upload-btn">Upload Image</button>
+        </form>
+        
+        <div class="info">
+            <h2>Supported Formats</h2>
+            <ul>
+                <li>JPEG / JPG</li>
+                <li>PNG</li>
+                <li>GIF</li>
+                <li>BMP</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>

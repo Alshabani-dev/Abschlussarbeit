@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the C++ Web Server</h1>
+        <p>This is a simple web server implemented in C++ using socket programming.</p>
+
+        <div class="upload-section">
+            <h2>Image Upload</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="file" id="fileInput" accept="image/*">
+                <button type="submit">Upload Image</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const messageDiv = document.getElementById('message');
+
+            if (!fileInput.files.length) {
+                messageDiv.textContent = 'Please select a file first!';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(text => {
+                if (text.includes('File uploaded successfully')) {
+                    messageDiv.textContent = 'File uploaded successfully!';
+                    messageDiv.style.color = 'green';
+                } else {
+                    messageDiv.textContent = 'Upload failed: ' + text;
+                    messageDiv.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = 'Error: ' + error.message;
+                messageDiv.style.color = 'red';
+            });
+        });
+    </script>
+</body>
+</html>

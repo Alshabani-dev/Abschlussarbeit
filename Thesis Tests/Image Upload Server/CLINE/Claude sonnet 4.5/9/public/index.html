@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Web Server - Image Upload</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>C++ Web Server</h1>
+            <p>Simple Image Upload Demo</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <h2>Upload Image</h2>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fileInput" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp" required>
+                        <label for="fileInput" class="file-label">Choose File</label>
+                        <span id="fileName" class="file-name">No file chosen</span>
+                    </div>
+                    <button type="submit" class="upload-btn">Upload</button>
+                </form>
+                
+                <div id="status" class="status"></div>
+            </div>
+            
+            <div class="info-section">
+                <h3>Supported Formats</h3>
+                <ul>
+                    <li>JPEG (.jpg, .jpeg)</li>
+                    <li>PNG (.png)</li>
+                    <li>GIF (.gif)</li>
+                    <li>BMP (.bmp)</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Built with C++ Socket Programming</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple C++ Web Server</h1>
+        <p>Upload an image file:</p>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" id="fileInput" name="file" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn">Upload</button>
+        </form>
+
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (fileInput.files.length === 0) {
+                statusMessage.textContent = 'Please select a file first!';
+                statusMessage.className = 'status-message error';
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            statusMessage.textContent = 'Uploading...';
+            statusMessage.className = 'status-message info';
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                statusMessage.textContent = 'Upload successful! ' + data;
+                statusMessage.className = 'status-message success';
+                fileInput.value = ''; // Clear the file input
+            })
+            .catch(error => {
+                statusMessage.textContent = 'Upload failed: ' + error.message;
+                statusMessage.className = 'status-message error';
+            });
+        });
+    </script>
+</body>
+</html>

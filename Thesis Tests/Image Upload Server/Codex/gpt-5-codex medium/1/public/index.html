@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Simple C++ Web Server</h1>
+        <p>Upload an image to test the multipart handler.</p>
+        <form id="upload-form" enctype="multipart/form-data" method="POST">
+            <label for="file">Choose image</label>
+            <input id="file" type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp" required>
+            <button type="submit">Upload</button>
+        </form>
+        <pre id="status"></pre>
+    </main>
+    <script src="/scripts.js"></script>
+</body>
+</html>

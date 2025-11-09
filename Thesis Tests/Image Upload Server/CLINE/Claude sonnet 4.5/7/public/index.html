@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>C++ Web Server</h1>
+            <p class="subtitle">Image Upload Demo</p>
+        </header>
+        
+        <main>
+            <div class="upload-card">
+                <h2>Upload Image</h2>
+                <p class="info">Supported formats: JPG, JPEG, PNG, GIF, BMP</p>
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <label for="file" class="file-label">
+                            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            <span id="fileLabel">Choose an image file</span>
+                        </label>
+                        <input type="file" id="file" name="file" accept="image/*" required>
+                    </div>
+                    
+                    <button type="submit" class="upload-btn">Upload Image</button>
+                </form>
+                
+                <div id="preview" class="preview"></div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Built with C++17 | Socket Programming</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>

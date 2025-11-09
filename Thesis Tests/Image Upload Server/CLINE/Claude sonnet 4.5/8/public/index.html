@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Web Server - File Upload</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 C++ Web Server</h1>
+            <p class="subtitle">Simple HTTP Server with File Upload</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <h2>Upload Image</h2>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <label for="fileInput" class="file-label">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <span id="fileLabel">Choose Image File</span>
+                        </label>
+                        <input type="file" id="fileInput" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp" required>
+                    </div>
+                    
+                    <button type="submit" class="upload-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Upload File
+                    </button>
+                </form>
+
+                <div id="message" class="message hidden"></div>
+            </div>
+
+            <div class="info-section">
+                <h3>📋 Supported File Types</h3>
+                <ul>
+                    <li>JPEG / JPG</li>
+                    <li>PNG</li>
+                    <li>GIF</li>
+                    <li>BMP</li>
+                </ul>
+
+                <h3>ℹ️ About</h3>
+                <p>This is a simple HTTP web server built with C++ using socket programming. It demonstrates:</p>
+                <ul>
+                    <li>TCP socket handling</li>
+                    <li>HTTP request/response parsing</li>
+                    <li>Static file serving</li>
+                    <li>Multipart form data uploads</li>
+                    <li>Binary-safe file handling</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with C++17 | Socket Programming | HTTP/1.1</p>
+        </footer>
+    </div>
+
+    <script src="/scripts.js"></script>
+</body>
+</html>

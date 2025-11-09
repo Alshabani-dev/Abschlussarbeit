@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple C++ Web Server</h1>
+        <p>Welcome to the simple C++ web server with image upload functionality.</p>
+
+        <div class="upload-form">
+            <h2>Upload an Image</h2>
+            <form id="uploadForm" enctype="multipart/form-data" method="post">
+                <input type="file" name="file" id="fileInput" accept="image/*" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const resultDiv = document.getElementById('result');
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                resultDiv.innerHTML = '<p class="error">Please select a file to upload.</p>';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(html => {
+                resultDiv.innerHTML = html;
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<p class="error">Error uploading file: ' + error.message + '</p>';
+            });
+        });
+    </script>
+</body>
+</html>

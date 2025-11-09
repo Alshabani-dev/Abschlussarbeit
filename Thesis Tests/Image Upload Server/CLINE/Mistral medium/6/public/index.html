@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple C++ Web Server</h1>
+        <p>Welcome to the simple C++ web server with image upload functionality.</p>
+
+        <div class="upload-section">
+            <h2>Upload an Image</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="file" id="fileInput" accept="image/*" required>
+                <button type="submit">Upload</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const messageDiv = document.getElementById('message');
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                messageDiv.textContent = 'Please select a file first.';
+                messageDiv.className = 'error';
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    messageDiv.textContent = 'File uploaded successfully!';
+                    messageDiv.className = 'success';
+                } else {
+                    return response.text().then(text => {
+                        messageDiv.textContent = text || 'Upload failed.';
+                        messageDiv.className = 'error';
+                    });
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = 'Error: ' + error.message;
+                messageDiv.className = 'error';
+            });
+        });
+    </script>
+</body>
+</html>

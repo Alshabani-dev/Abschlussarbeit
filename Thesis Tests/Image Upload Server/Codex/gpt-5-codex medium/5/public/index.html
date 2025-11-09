@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple C++ Web Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>Welcome</h1>
+            <p>Select an image to upload. Supported formats: JPG, JPEG, PNG, GIF, BMP.</p>
+            <form id="upload-form">
+                <label class="file-input">
+                    <span>Choose an image</span>
+                    <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp" required>
+                </label>
+                <button type="submit">Upload</button>
+            </form>
+            <p id="status"></p>
+        </section>
+    </main>
+    <script src="/scripts.js"></script>
+</body>
+</html>

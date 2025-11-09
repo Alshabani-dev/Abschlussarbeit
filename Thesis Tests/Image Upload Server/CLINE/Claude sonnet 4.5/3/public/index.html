@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Server</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📁 Image Upload Server</h1>
+            <p>Upload your images (JPG, PNG, GIF, BMP)</p>
+        </header>
+        
+        <main>
+            <div class="upload-section">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <label for="fileInput" class="file-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <span id="fileName">Choose an image file</span>
+                        </label>
+                        <input type="file" id="fileInput" name="file" accept="image/*" required>
+                    </div>
+                    
+                    <button type="submit" id="uploadBtn">
+                        <span id="btnText">Upload Image</span>
+                        <span id="btnLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+                
+                <div id="preview" class="preview" style="display: none;">
+                    <h3>Preview:</h3>
+                    <img id="previewImage" src="" alt="Preview">
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>ℹ️ Information</h2>
+                <ul>
+                    <li><strong>Supported formats:</strong> JPG, JPEG, PNG, GIF, BMP</li>
+                    <li><strong>Upload method:</strong> POST with multipart/form-data</li>
+                    <li><strong>Storage:</strong> Files saved to Data/ directory with timestamp</li>
+                    <li><strong>Server:</strong> Custom C++ socket-based HTTP server</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>C++ Web Server Project | Socket Programming Demo</p>
+        </footer>
+    </div>
+    
+    <script src="/scripts.js"></script>
+</body>
+</html>
