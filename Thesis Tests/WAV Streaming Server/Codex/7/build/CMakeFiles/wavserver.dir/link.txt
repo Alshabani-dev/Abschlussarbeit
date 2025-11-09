@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wextra -Wpedantic CMakeFiles/wavserver.dir/src/main.cpp.o CMakeFiles/wavserver.dir/src/Server.cpp.o -o wavserver 

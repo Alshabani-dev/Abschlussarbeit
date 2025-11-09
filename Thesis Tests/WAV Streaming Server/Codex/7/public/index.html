@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAV Stream</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <main class="app">
+        <header>
+            <h1>🎵 WAV Stream</h1>
+            <p class="subtitle">Binary-safe audio streaming with a custom glassmorphism player.</p>
+        </header>
+
+        <section class="player-card glass">
+            <div class="track-info">
+                <span class="icon">🎼</span>
+                <span class="track-name">track.wav</span>
+            </div>
+
+            <audio id="player" src="/audio" preload="metadata"></audio>
+
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+
+            <input type="range" id="progressBar" min="0" max="100" value="0" step="0.1" aria-label="Seek in track">
+
+            <div class="controls">
+                <button id="play" class="primary">▶ Play</button>
+                <button id="pause">⏸ Pause</button>
+                <button id="stop" class="danger">⏹ Stop</button>
+            </div>
+
+            <p id="status" class="status ready">Ready to play</p>
+        </section>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>
