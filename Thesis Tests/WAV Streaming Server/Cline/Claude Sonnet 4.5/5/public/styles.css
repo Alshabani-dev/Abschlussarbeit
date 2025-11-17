@@ -1,0 +1,233 @@
+:root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+    --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0.5px, transparent 1px);
+    background-size: 50px 50px;
+    animation: pulse 8s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.2; }
+}
+
+.container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2.2rem;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.track-info {
+    background: linear-gradient(90deg, #fde68a, #fca5a5);
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.track-info .icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+.track-name {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.player-wrapper {
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    margin-bottom: 10px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, var(--primary) var(--progress, 0%), rgba(255, 255, 255, 0.3) var(--progress, 0%));
+}
+
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--glass-bg);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.status {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.status.playing {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.status.paused {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+}
+
+.status.stopped {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.wave-animation {
+    height: 10px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+    border-radius: 0 0 20px 20px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.wave-animation::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        rgba(139, 92, 246, 0) 0%,
+        rgba(139, 92, 246, 0.5) 50%,
+        rgba(139, 92, 246, 0) 100%);
+    animation: wave 3s linear infinite;
+}
+
+@keyframes wave {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@media (max-width: 600px) {
+    .controls {
+        flex-direction: column;
+    }
+
+    .control-btn {
+        margin-bottom: 8px;
+    }
+}
