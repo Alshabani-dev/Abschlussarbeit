@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/minisql.dir/src/Engine.cpp.o CMakeFiles/minisql.dir/src/HttpServer.cpp.o CMakeFiles/minisql.dir/src/Lexer.cpp.o CMakeFiles/minisql.dir/src/Parser.cpp.o CMakeFiles/minisql.dir/src/Storage.cpp.o CMakeFiles/minisql.dir/src/Utils.cpp.o CMakeFiles/minisql.dir/src/main.cpp.o -o minisql 
