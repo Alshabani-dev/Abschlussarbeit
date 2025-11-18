@@ -1,0 +1,3 @@
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/SQL Interpreter/Codex/pgt-5-codex medium/1/build/CMakeFiles/minisql.dir
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/SQL Interpreter/Codex/pgt-5-codex medium/1/build/CMakeFiles/edit_cache.dir
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/SQL Interpreter/Codex/pgt-5-codex medium/1/build/CMakeFiles/rebuild_cache.dir
