@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Server-Side Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+    <main class="container">
+        <section class="panel">
+            <h1>Graph Plotter</h1>
+            <p>Enter comma separated numeric data for both axes. The plot is rendered entirely on the server and returned as a BMP image.</p>
+            <form id="plotForm">
+                <label for="xData">X values</label>
+                <textarea id="xData" name="xData" rows="3" placeholder="1, 2, 3, 4" required></textarea>
+
+                <label for="yData">Y values</label>
+                <textarea id="yData" name="yData" rows="3" placeholder="3, 6, 9, 12" required></textarea>
+
+                <label for="plot">Plot type</label>
+                <select id="plot" name="plot">
+                    <option value="line">Line</option>
+                    <option value="scatter">Scatter</option>
+                    <option value="bar">Bar</option>
+                </select>
+
+                <button type="submit">Render Graph</button>
+            </form>
+            <div class="status">
+                <div class="spinner" id="spinner"></div>
+                <p id="statusText">Ready.</p>
+            </div>
+        </section>
+        <section class="panel image-panel">
+            <h2>Preview</h2>
+            <div class="preview">
+                <img id="plotImage" alt="Graph preview"/>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById('plotForm');
+        const image = document.getElementById('plotImage');
+        const statusText = document.getElementById('statusText');
+        const spinner = document.getElementById('spinner');
+
+        function setStatus(text, busy = false) {
+            statusText.textContent = text;
+            spinner.classList.toggle('visible', busy);
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new URLSearchParams(new FormData(form));
+            setStatus('Rendering...', true);
+            image.removeAttribute('src');
+            try {
+                const response = await fetch('/plot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString(),
+                    cache: 'no-store'
+                });
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(text.trim() || 'Server error');
+                }
+                const blob = await response.blob();
+                const objectUrl = URL.createObjectURL(blob);
+                image.src = objectUrl;
+                setStatus('Rendering complete.', false);
+            } catch (error) {
+                setStatus(error.message, false);
+            }
+        });
+    </script>
+</body>
+</html>
