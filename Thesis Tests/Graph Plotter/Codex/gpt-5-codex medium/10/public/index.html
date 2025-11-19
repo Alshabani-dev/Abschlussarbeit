@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>C++ Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Graph Plotter</h1>
+            <p>Enter comma-separated values for X and Y, choose a plot, and render.</p>
+        </header>
+        <section class="form-card">
+            <form id="plot-form">
+                <label>
+                    X Values
+                    <input type="text" name="xValues" placeholder="1,2,3" required />
+                </label>
+                <label>
+                    Y Values
+                    <input type="text" name="yValues" placeholder="10,20,15" required />
+                </label>
+                <label>
+                    Plot Type
+                    <select name="plot">
+                        <option value="line">Line</option>
+                        <option value="scatter">Scatter</option>
+                        <option value="bar">Bar</option>
+                    </select>
+                </label>
+                <button type="submit">Render</button>
+            </form>
+            <div id="status" class="status"></div>
+        </section>
+        <section class="preview">
+            <div class="image-wrapper">
+                <div class="spinner" id="spinner">Loading...</div>
+                <img id="plot-image" alt="Plot preview" />
+            </div>
+        </section>
+    </div>
+    <script>
+        const form = document.getElementById('plot-form');
+        const statusEl = document.getElementById('status');
+        const img = document.getElementById('plot-image');
+        const spinner = document.getElementById('spinner');
+
+        const showStatus = (text, type = 'info') => {
+            statusEl.textContent = text;
+            statusEl.className = `status ${type}`;
+        };
+
+        const toggleLoading = (loading) => {
+            spinner.style.display = loading ? 'block' : 'none';
+            if (loading) {
+                img.removeAttribute('src');
+            }
+        };
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            toggleLoading(true);
+            showStatus('Rendering plot...', 'info');
+            try {
+                const formData = new FormData(form);
+                const params = new URLSearchParams();
+                for (const [key, value] of formData.entries()) {
+                    params.append(key, value);
+                }
+                const response = await fetch('/plot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: params.toString()
+                });
+                if (!response.ok) {
+                    throw new Error('Server returned ' + response.status);
+                }
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                img.src = url;
+                showStatus('Plot updated', 'success');
+            } catch (error) {
+                showStatus('Error: ' + error.message, 'error');
+            } finally {
+                toggleLoading(false);
+            }
+        });
+    </script>
+</body>
+</html>
