@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Side Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Server-Side Graph Plotter</h1>
+            <p>Submit your X and Y coordinates, pick a plot type, and the C++ server will render a BMP graph.</p>
+        </header>
+
+        <form id="plotForm">
+            <div class="form-row">
+                <label for="xValues">X Values (comma separated)</label>
+                <textarea id="xValues" name="xValues" rows="3" required>0, 1, 2, 3, 4, 5</textarea>
+            </div>
+
+            <div class="form-row">
+                <label for="yValues">Y Values (comma separated)</label>
+                <textarea id="yValues" name="yValues" rows="3" required>0, 1, 4, 9, 16, 25</textarea>
+            </div>
+
+            <div class="form-row">
+                <label for="plot">Plot Type</label>
+                <select id="plot" name="plot">
+                    <option value="line">Line Plot</option>
+                    <option value="scatter">Scatter Plot</option>
+                    <option value="bar">Bar Plot</option>
+                </select>
+            </div>
+
+            <div class="actions">
+                <button type="submit">Render Plot</button>
+                <span id="status"></span>
+            </div>
+        </form>
+
+        <section class="preview">
+            <div class="preview-header">
+                <h2>Rendered Plot</h2>
+                <button id="clearImage" type="button">Clear</button>
+            </div>
+            <div class="preview-body">
+                <img id="plotImage" alt="Graph preview will appear here" />
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById('plotForm');
+        const statusText = document.getElementById('status');
+        const plotImage = document.getElementById('plotImage');
+        const clearButton = document.getElementById('clearImage');
+        let activeObjectURL = null;
+
+        clearButton.addEventListener('click', () => {
+            if (activeObjectURL) {
+                URL.revokeObjectURL(activeObjectURL);
+                activeObjectURL = null;
+            }
+            plotImage.removeAttribute('src');
+            statusText.textContent = '';
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            statusText.textContent = 'Rendering...';
+
+            const formData = new FormData(form);
+            const encoded = new URLSearchParams();
+            formData.forEach((value, key) => encoded.append(key, value));
+
+            try {
+                const response = await fetch('/plot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: encoded.toString()
+                });
+
+                if (!response.ok) {
+                    throw new Error('Server returned ' + response.status);
+                }
+
+                const blob = await response.blob();
+                if (activeObjectURL) {
+                    URL.revokeObjectURL(activeObjectURL);
+                }
+                activeObjectURL = URL.createObjectURL(blob);
+                plotImage.src = activeObjectURL;
+                statusText.textContent = 'Plot updated';
+            } catch (error) {
+                statusText.textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
