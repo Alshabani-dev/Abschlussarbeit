@@ -1,0 +1,3 @@
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/8/build/CMakeFiles/graphserver.dir
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/8/build/CMakeFiles/edit_cache.dir
+/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/8/build/CMakeFiles/rebuild_cache.dir

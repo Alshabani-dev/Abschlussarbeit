@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Side Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Server-Side Graph Plotter</h1>
+        <p>Enter X and Y values, choose a plot type, and the C++ server will render the graph as a BMP image.</p>
+    </header>
+
+    <section class="form-card">
+        <form id="plotForm">
+            <label for="xData">X Values (comma or space separated)</label>
+            <textarea id="xData" name="xData" placeholder="e.g. 0, 1, 2, 3" required></textarea>
+
+            <label for="yData">Y Values (comma or space separated)</label>
+            <textarea id="yData" name="yData" placeholder="e.g. 0, 1.5, 2.5, 4" required></textarea>
+
+            <label for="plot">Plot Type</label>
+            <select id="plot" name="plot">
+                <option value="line">Line Plot</option>
+                <option value="scatter">Scatter Plot</option>
+                <option value="bar">Bar Plot</option>
+            </select>
+
+            <button type="submit">Generate Plot</button>
+        </form>
+        <div class="status" id="statusMessage"></div>
+    </section>
+
+    <section class="result-card">
+        <h2>Result</h2>
+        <div class="image-wrapper">
+            <div class="placeholder" id="placeholder">Your plot will appear here.</div>
+            <img id="plotImage" alt="Generated plot" hidden>
+        </div>
+    </section>
+</div>
+
+<script>
+const form = document.getElementById('plotForm');
+const statusMessage = document.getElementById('statusMessage');
+const imageElement = document.getElementById('plotImage');
+const placeholder = document.getElementById('placeholder');
+
+function setStatus(message, isError = false) {
+    statusMessage.textContent = message;
+    statusMessage.classList.toggle('error', isError);
+}
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    setStatus('Generating plot...', false);
+    placeholder.hidden = false;
+    imageElement.hidden = true;
+
+    const formData = new FormData(form);
+    const payload = new URLSearchParams();
+    for (const [key, value] of formData.entries()) {
+        payload.append(key, value);
+    }
+
+    try {
+        const response = await fetch('/plot', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: payload.toString(),
+        });
+        if (!response.ok) {
+            throw new Error('Server returned ' + response.status);
+        }
+        const blob = await response.blob();
+        const objectUrl = URL.createObjectURL(blob);
+        imageElement.src = objectUrl;
+        imageElement.hidden = false;
+        placeholder.hidden = true;
+        setStatus('Success! Scroll down to view the plot.');
+    } catch (error) {
+        setStatus('Failed to generate plot: ' + error.message, true);
+    }
+});
+</script>
+</body>
+</html>
