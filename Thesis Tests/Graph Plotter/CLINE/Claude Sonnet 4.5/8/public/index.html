@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Graph Plotting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>C++ Graph Plotting</h1>
+            <p class="subtitle">Server-side graph rendering with pure C++</p>
+        </header>
+
+        <main>
+            <div class="form-section">
+                <form id="plotForm">
+                    <div class="form-group">
+                        <label for="xdata">X Coordinates</label>
+                        <textarea id="xdata" name="xdata" placeholder="0,1,2,3,4,5,6,7,8,9" required></textarea>
+                        <small>Enter comma-separated X values</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ydata">Y Coordinates</label>
+                        <textarea id="ydata" name="ydata" placeholder="1,4,2,7,6,8,3,9,5,4" required></textarea>
+                        <small>Enter comma-separated Y values</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plotType">Plot Type</label>
+                        <select id="plotType" name="plot" required>
+                            <option value="line">Line Plot</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="bar">Bar Plot</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Generate Plot</button>
+                </form>
+            </div>
+
+            <div class="result-section">
+                <div id="imageContainer" style="display: none;">
+                    <h3>Generated Plot</h3>
+                    <div class="image-wrapper">
+                        <img id="plotImage" alt="Generated plot">
+                    </div>
+                </div>
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating plot...</p>
+                </div>
+                <div id="error" class="error" style="display: none;"></div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="info-box">
+                <h3>How to Use</h3>
+                <ul>
+                    <li>Enter X and Y coordinates as comma-separated values</li>
+                    <li>Select a plot type (Line, Scatter, or Bar)</li>
+                    <li>Click "Generate Plot" to create your graph</li>
+                    <li>View and save your plot image</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>Features</h3>
+                <ul>
+                    <li>Pure C++ implementation (no external libraries)</li>
+                    <li>Server-side image generation in BMP format</li>
+                    <li>Integer-aligned axis labels and grid</li>
+                    <li>Three plot types: Line, Scatter, and Bar</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('plotForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const xdata = document.getElementById('xdata').value;
+            const ydata = document.getElementById('ydata').value;
+            const plotType = document.getElementById('plotType').value;
+            
+            const imageContainer = document.getElementById('imageContainer');
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            
+            // Hide previous results
+            imageContainer.style.display = 'none';
+            error.style.display = 'none';
+            loading.style.display = 'block';
+            
+            try {
+                const formData = new URLSearchParams();
+                formData.append('xdata', xdata);
+                formData.append('ydata', ydata);
+                formData.append('plot', plotType);
+                
+                const response = await fetch('/plot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData.toString()
+                });
+                
+                loading.style.display = 'none';
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Failed to generate plot');
+                }
+                
+                // Get image as blob
+                const blob = await response.blob();
+                const imageUrl = URL.createObjectURL(blob);
+                
+                // Display image
+                const img = document.getElementById('plotImage');
+                img.src = imageUrl;
+                imageContainer.style.display = 'block';
+                
+            } catch (err) {
+                loading.style.display = 'none';
+                error.textContent = 'Error: ' + err.message;
+                error.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
