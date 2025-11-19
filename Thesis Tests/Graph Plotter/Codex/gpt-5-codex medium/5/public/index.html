@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Server-Side Graph Plotter</h1>
+            <p>Enter comma-separated numeric arrays for X and Y, choose your plot type, and render the graph on the server.</p>
+        </header>
+        <main>
+            <form id="plot-form">
+                <label for="x-input">X Values</label>
+                <textarea id="x-input" name="x" placeholder="0, 1, 2, 3" required></textarea>
+
+                <label for="y-input">Y Values</label>
+                <textarea id="y-input" name="y" placeholder="0, 1.3, 2.5, 4" required></textarea>
+
+                <label for="plot-select">Plot Type</label>
+                <select id="plot-select" name="plot">
+                    <option value="line">Line</option>
+                    <option value="scatter">Scatter</option>
+                    <option value="bar">Bar</option>
+                </select>
+
+                <button type="submit">Render Plot</button>
+            </form>
+            <div class="preview">
+                <div class="preview-header">
+                    <span>Preview</span>
+                    <span id="status"></span>
+                </div>
+                <div id="spinner" class="spinner hidden"></div>
+                <img id="plot-image" alt="Rendered plot" />
+            </div>
+        </main>
+    </div>
+
+    <script>
+    const form = document.getElementById('plot-form');
+    const status = document.getElementById('status');
+    const spinner = document.getElementById('spinner');
+    const plotImage = document.getElementById('plot-image');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        status.textContent = '';
+        spinner.classList.remove('hidden');
+        plotImage.removeAttribute('src');
+        try {
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
+            for (const [key, value] of formData.entries()) {
+                params.append(key, value.trim());
+            }
+
+            const response = await fetch('/plot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || 'Request failed');
+            }
+
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            plotImage.src = url;
+            status.textContent = 'Rendered successfully';
+        } catch (err) {
+            status.textContent = err.message;
+        } finally {
+            spinner.classList.add('hidden');
+        }
+    });
+    </script>
+</body>
+</html>
