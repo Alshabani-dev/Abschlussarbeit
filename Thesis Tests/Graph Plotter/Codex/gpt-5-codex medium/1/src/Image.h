@@ -1,0 +1,29 @@
+#ifndef IMAGE_H
+#define IMAGE_H
+
+#include <string>
+#include <vector>
+
+class Image {
+public:
+    Image(int width, int height);
+
+    void clear(unsigned char r, unsigned char g, unsigned char b);
+    void setPixel(int x, int y, unsigned char r, unsigned char g, unsigned char b);
+
+    int getWidth() const { return width_; }
+    int getHeight() const { return height_; }
+
+    std::string toPPM() const;
+    std::string toBMP() const;
+
+private:
+    int width_;
+    int height_;
+    std::vector<unsigned char> pixels_;
+
+    void writeInt32(std::vector<unsigned char>& data, int value) const;
+    void writeInt16(std::vector<unsigned char>& data, short value) const;
+};
+
+#endif
