@@ -1,0 +1,27 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/9/src/HttpServer.cpp" "CMakeFiles/graph_server.dir/src/HttpServer.cpp.o" "gcc" "CMakeFiles/graph_server.dir/src/HttpServer.cpp.o.d"
+  "/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/9/src/Image.cpp" "CMakeFiles/graph_server.dir/src/Image.cpp.o" "gcc" "CMakeFiles/graph_server.dir/src/Image.cpp.o.d"
+  "/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/9/src/PlotRenderer.cpp" "CMakeFiles/graph_server.dir/src/PlotRenderer.cpp.o" "gcc" "CMakeFiles/graph_server.dir/src/PlotRenderer.cpp.o.d"
+  "/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/9/src/Utils.cpp" "CMakeFiles/graph_server.dir/src/Utils.cpp.o" "gcc" "CMakeFiles/graph_server.dir/src/Utils.cpp.o.d"
+  "/home/aalshabani/workspace/Abschlussarbeit/Thesis Tests/Graph Plotter/Codex/gpt-5-codex medium/9/src/main.cpp" "CMakeFiles/graph_server.dir/src/main.cpp.o" "gcc" "CMakeFiles/graph_server.dir/src/main.cpp.o.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

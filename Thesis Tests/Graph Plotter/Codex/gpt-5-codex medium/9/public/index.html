@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server-Side Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="container">
+    <h1>Graph Plotter</h1>
+    <form id="plot-form">
+        <label>
+            X Values (comma separated)
+            <input type="text" name="xValues" placeholder="1,2,3,4" required>
+        </label>
+        <label>
+            Y Values (comma separated)
+            <input type="text" name="yValues" placeholder="10,20,15,25" required>
+        </label>
+        <label>
+            Plot Type
+            <select name="plot">
+                <option value="line">Line</option>
+                <option value="scatter">Scatter</option>
+                <option value="bar">Bar</option>
+            </select>
+        </label>
+        <button type="submit">Render Plot</button>
+    </form>
+    <div id="status" class="status hidden">Rendering…</div>
+    <div class="image-wrapper hidden" id="image-wrapper">
+        <img id="plot-image" alt="Generated plot">
+    </div>
+</main>
+
+<script>
+const form = document.getElementById('plot-form');
+const statusEl = document.getElementById('status');
+const imageWrapper = document.getElementById('image-wrapper');
+const plotImage = document.getElementById('plot-image');
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    statusEl.textContent = 'Rendering…';
+    statusEl.classList.remove('hidden');
+    imageWrapper.classList.add('hidden');
+
+    const formData = new URLSearchParams(new FormData(form));
+    try {
+        const response = await fetch('/plot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formData.toString()
+        });
+        if (!response.ok) {
+            throw new Error('Failed to render plot');
+        }
+        const blob = await response.blob();
+        plotImage.src = URL.createObjectURL(blob);
+        imageWrapper.classList.remove('hidden');
+        statusEl.classList.add('hidden');
+    } catch (err) {
+        statusEl.textContent = err.message;
+    }
+});
+</script>
+</body>
+</html>
