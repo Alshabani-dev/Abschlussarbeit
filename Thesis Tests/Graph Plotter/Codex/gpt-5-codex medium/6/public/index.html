@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C++ Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Server-Side Graph Plotter</h1>
+            <p>Enter comma-separated coordinate arrays and let the C++ server render the plot.</p>
+        </header>
+
+        <form id="plot-form">
+            <label for="xValues">X Values</label>
+            <textarea id="xValues" name="xValues" rows="3" placeholder="1, 2, 3, 4"></textarea>
+
+            <label for="yValues">Y Values</label>
+            <textarea id="yValues" name="yValues" rows="3" placeholder="10, 20, 15, 30"></textarea>
+
+            <label for="plot">Plot Type</label>
+            <select id="plot" name="plot">
+                <option value="line">Line</option>
+                <option value="scatter">Scatter</option>
+                <option value="bar">Bar</option>
+            </select>
+
+            <button type="submit">Generate Plot</button>
+        </form>
+
+        <div class="status" id="status"></div>
+
+        <div class="preview">
+            <img id="plot-image" alt="Generated plot will appear here" />
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('plot-form');
+        const statusEl = document.getElementById('status');
+        const imageEl = document.getElementById('plot-image');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            statusEl.textContent = 'Rendering...';
+            imageEl.removeAttribute('src');
+
+            const formData = new FormData(form);
+            const payload = new URLSearchParams(formData);
+
+            try {
+                const response = await fetch('/plot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: payload.toString()
+                });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(text || 'Failed to render plot');
+                }
+
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                imageEl.src = url;
+                statusEl.textContent = 'Plot updated';
+            } catch (error) {
+                statusEl.textContent = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
