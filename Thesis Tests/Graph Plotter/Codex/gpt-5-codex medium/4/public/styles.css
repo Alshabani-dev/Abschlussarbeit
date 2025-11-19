@@ -1,0 +1,108 @@
+:root {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f0f4ff;
+    color: #0a2342;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(20, 60, 140, 0.15);
+    padding: 32px;
+    width: min(900px, 90%);
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+}
+
+header p {
+    margin: 0 0 24px 0;
+    color: #4d648d;
+}
+
+form {
+    display: grid;
+    gap: 16px;
+}
+
+label {
+    font-weight: 600;
+}
+
+textarea, select {
+    border: 1px solid #b0c4ff;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+button {
+    margin-top: 8px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(58, 123, 213, 0.3);
+}
+
+.status {
+    margin-top: 24px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #e8efff;
+    color: #234c8a;
+    font-weight: 500;
+}
+
+.status.loading::after {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(35, 76, 138, 0.4);
+    border-top-color: #234c8a;
+    border-radius: 50%;
+    margin-left: 8px;
+    animation: spin 0.8s linear infinite;
+}
+
+.image-wrapper {
+    margin-top: 24px;
+    border: 1px dashed #b4c9ff;
+    border-radius: 12px;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fbff;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
