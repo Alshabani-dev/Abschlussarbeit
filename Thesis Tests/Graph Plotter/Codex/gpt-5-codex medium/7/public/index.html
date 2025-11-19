@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C++ Graph Plotter</title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>Server-Side Graph Plotter</h1>
+            <p class="subtitle">Enter comma-separated values for X and Y, choose a plot style, and render a server-generated BMP image.</p>
+            <form id="plot-form">
+                <div class="form-group">
+                    <label for="xData">X Data</label>
+                    <textarea id="xData" name="xData" placeholder="0, 1, 2, 3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="yData">Y Data</label>
+                    <textarea id="yData" name="yData" placeholder="3, 1, 4, 2" required></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="plot">Plot Type</label>
+                    <select id="plot" name="plot">
+                        <option value="line">Line</option>
+                        <option value="scatter">Scatter</option>
+                        <option value="bar">Bar</option>
+                    </select>
+                </div>
+                <button type="submit">Generate Plot</button>
+            </form>
+        </section>
+        <section class="card result">
+            <div class="result-header">
+                <h2>Plot Preview</h2>
+                <div id="status" class="status">Idle</div>
+            </div>
+            <div class="image-wrapper">
+                <img id="plot-image" alt="Graph will appear here" />
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById('plot-form');
+        const statusEl = document.getElementById('status');
+        const imageEl = document.getElementById('plot-image');
+
+        function updateStatus(text, type = '') {
+            statusEl.textContent = text;
+            statusEl.className = `status ${type}`;
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            updateStatus('Rendering…', 'info');
+            imageEl.removeAttribute('src');
+
+            const formData = new FormData(form);
+            const body = new URLSearchParams(formData).toString();
+
+            try {
+                const response = await fetch('/plot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body
+                });
+
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(errorMessage.trim() || 'Server error');
+                }
+
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                imageEl.src = url;
+                updateStatus('Success', 'success');
+            } catch (error) {
+                updateStatus(error.message, 'error');
+            }
+        });
+    </script>
+</body>
+</html>
